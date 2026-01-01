@@ -1,0 +1,48 @@
+/* Soft Violet Brand Theme Customization (#8b5cf6) */
+
+:root {
+  /* Accent colors for light mode */
+  /* A very pale tint of the primary color for subtle backgrounds */
+  --sl-color-accent-low: #f5f3ff;
+  /* The main primary color #8b5cf6 */
+  --sl-color-accent: #8b5cf6;
+  /* A darker version for hover states in light mode */
+  --sl-color-accent-high: #7c3aed;
+  /* The hue component (HSL angle) of #8b5cf6 */
+  --sl-hue-accent: 258;
+
+  /* Optional: Customize other elements to match */
+  --sl-color-text-accent: var(--sl-color-accent);
+}
+
+[data-theme="dark"] {
+  /* Accent colors for dark mode */
+  /* A deep, dark tint for dark mode backgrounds */
+  --sl-color-accent-low: #2e1065;
+  /* A slightly lighter/brighter version of the primary to pop against dark backgrounds */
+  --sl-color-accent: #a78bfa;
+  /* The lightest version for hover states in dark mode */
+  --sl-color-accent-high: #c4b5fd;
+  /* Hue remains the same */
+  --sl-hue-accent: 258;
+
+  /* Optional: Customize other elements to match */
+  --sl-color-text-accent: var(--sl-color-accent);
+}
+
+/* Customize link colors to use the brand color */
+a {
+  --sl-color-text-accent: var(--sl-color-accent);
+}
+
+/* Customize primary button (hero CTA) */
+.sl-link-button[data-variant="primary"] {
+  background-color: var(--sl-color-accent);
+  border-color: var(--sl-color-accent);
+  color: var(--sl-color-text-invert); /* Ensure text remains readable */
+}
+
+.sl-link-button[data-variant="primary"]:hover {
+  background-color: var(--sl-color-accent-high);
+  border-color: var(--sl-color-accent-high);
+}

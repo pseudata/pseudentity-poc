@@ -1,0 +1,40 @@
+---
+import Default from "@astrojs/starlight/components/Footer.astro";
+---
+
+<Default {...Astro.props} />
+
+<div class="copyright">
+  <p>
+    © 2025 Pseudentity Project. Part of the <a href="https://github.com/pseudata" target="_blank" rel="noopener"
+      >Pseudata Ecosystem</a
+    >. Open Source under <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank" rel="noopener"
+      >Apache License 2.0</a
+    >.
+  </p>
+</div>
+
+<style>
+  .copyright {
+    text-align: center;
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-gray-3);
+    padding-top: 1.5rem;
+    padding-bottom: 1rem;
+    margin-top: 1rem;
+    border-top: 1px solid var(--sl-color-hairline-shade);
+  }
+
+  .copyright p {
+    margin: 0;
+  }
+
+  .copyright a {
+    color: var(--sl-color-white);
+    text-decoration: underline;
+  }
+
+  .copyright a:hover {
+    color: var(--sl-color-accent-high);
+  }
+</style>

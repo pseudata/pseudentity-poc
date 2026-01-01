@@ -1,0 +1,122 @@
+---
+title: Pseudentity
+description: Deterministic Identity for Development - Visual companion and stateless OIDC provider for the pseudata ecosystem
+template: splash
+hero:
+  tagline: Identity Provider for Development
+  actions:
+    - text: Concept
+      link: /reference/concept/
+      icon: open-book
+      variant: primary
+    - text: GitHub
+      link: https://github.com/pseudata/pseudentity
+      icon: github
+      variant: secondary
+head:
+  - tag: script
+    attrs:
+      type: application/ld+json
+    content: |
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Pseudentity",
+        "url": "https://pseudentity.dev",
+        "logo": "https://pseudentity.dev/logo-light.svg",
+        "description": "Deterministic Identity for Development - Visual companion and stateless OIDC provider",
+        "sameAs": ["https://github.com/pseudata/pseudentity"]
+      }
+  - tag: script
+    attrs:
+      type: application/ld+json
+    content: |
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Pseudentity",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": ["Windows", "macOS", "Linux"],
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "description": "Stateless identity provider and visual companion for testing auth flows with deterministic mock identities",
+        "featureList": [
+          "Profile viewer for generated users",
+          "Stateless OIDC provider",
+          "Mock enterprise SCIM 2.0",
+          "Zero database architecture"
+        ]
+      }
+---
+
+import { Card, CardGrid, Aside } from "@astrojs/starlight/components";
+
+<Aside type="caution" title="Early Development">
+Pseudentity is in early development. Not yet ready for public deployment. [Star the repo](https://github.com/pseudata/pseudentity) to get notified about the first public release.
+</Aside>
+
+## Identity Provider & Visual Companion
+
+**Pseudentity** is a **stateless OpenID Connect (OIDC) provider** and visual companion for the [pseudata](https://pseudata.dev) ecosystem. Add "Login with Pseudentity" to your apps for testing and development—no real auth provider setup required.
+
+Built on **PseudoID** (UUID v8), every identity is entirely stateless—no database, no sessions. Just decode the ID to regenerate the complete profile on demand.
+
+## Key Features
+
+<CardGrid>
+  <Card title="OpenID Connect Provider" icon="star">
+    **Add "Login with Pseudentity" to your apps.** OIDC-compliant with signed JWTs—no sessions, no database. Perfect for testing auth flows without configuring real identity providers.
+  </Card>
+  <Card title="Profile Viewer" icon="open-book">
+    Visualize any generated user with a rich UI, avatar, and metadata. Jump to any user instantly using their PseudoID.
+  </Card>
+  <Card title="Mock Enterprise (SCIM 2.0)" icon="setting">
+    Test user provisioning flows with infinite, paginated employee lists. Perfect for testing Okta or Azure AD integrations.
+  </Card>
+  <Card title="Zero Database" icon="rocket">
+    Entirely stateless—uses CPU (math) instead of storage. Every profile is calculated on-demand from the PseudoID.
+  </Card>
+</CardGrid>
+
+## Why Pseudentity?
+
+Testing authentication in development typically requires:
+- **Expensive third-party providers** - Auth0, Okta, or other SaaS identity platforms
+- **Managing test databases** - Storing and maintaining fake user accounts
+- **Coordinating credentials** - Sharing test logins across teams
+- **Resetting state** - Cleaning up between test runs
+
+**Pseudentity eliminates all of this** by making identities completely stateless and deterministic. No database. No sessions. Just pure math.
+
+## How It Works
+
+Pseudentity uses **PseudoID**, a custom UUID v8 format that encodes generation parameters directly into the 128-bit ID space:
+
+```
+SSSSSSSS-SSSS-8SSS-vSTT-TTIIIIIIIII
+
+64 bits: World Seed (universe ID)
+16 bits: Type Sequence (User = 101)
+40 bits: Index (0 to 1.1 trillion)
+```
+
+This allows any server to "inflate" a full user profile instantly just by decoding the ID—no database lookups required.
+
+**Learn more:** [PseudoID Technical Documentation](/reference/pseudoid/)
+
+## Use Cases
+
+- **Testing Auth Flows** - Add OIDC login to your app without configuring Auth0, Okta, or other real identity providers
+- **Local Development** - Test authentication features locally with deterministic, repeatable identities
+- **Profile Visualization** - See what your generated users actually look like with avatars and metadata
+- **Enterprise SSO Testing** - Simulate SCIM provisioning flows for Okta, Azure AD, or other enterprise identity systems
+- **Sales Demos** - Show authentication features with consistent, professional-looking identities
+
+## Powered by Pseudata
+
+Pseudentity is built on top of [pseudata](https://pseudata.dev), the deterministic mock data generator that produces identical data across all programming languages.
+
+Visit **[pseudata.dev](https://pseudata.dev)** to learn about the underlying engine.

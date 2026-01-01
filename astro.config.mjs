@@ -1,0 +1,132 @@
+import { defineConfig } from "astro/config";
+import starlight from "@astrojs/starlight";
+
+// https://astro.build/config
+export default defineConfig({
+  site: "https://pseudentity.dev",
+  server: {
+    host: true,
+  },
+  integrations: [
+    starlight({
+      title: "Pseudentity",
+      head: [
+        {
+          tag: "link",
+          attrs: {
+            rel: "alternate",
+            type: "text/plain",
+            title: "LLM Information",
+            href: "/llms.txt",
+          },
+        },
+        {
+          tag: "link",
+          attrs: {
+            rel: "icon",
+            href: "/logo-light.svg",
+            type: "image/svg+xml",
+            media: "(prefers-color-scheme: light)",
+          },
+        },
+        {
+          tag: "link",
+          attrs: {
+            rel: "icon",
+            href: "/logo-dark.svg",
+            type: "image/svg+xml",
+            media: "(prefers-color-scheme: dark)",
+          },
+        },
+        {
+          tag: "link",
+          attrs: {
+            rel: "apple-touch-icon",
+            sizes: "180x180",
+            href: "/apple-touch-icon.png",
+          },
+        },
+        {
+          tag: "link",
+          attrs: {
+            rel: "manifest",
+            href: "/manifest.json",
+          },
+        },
+        {
+          tag: "meta",
+          attrs: {
+            name: "theme-color",
+            content: "#8b5cf6",
+            media: "(prefers-color-scheme: light)",
+          },
+        },
+        {
+          tag: "meta",
+          attrs: {
+            name: "theme-color",
+            content: "#a78bfa",
+            media: "(prefers-color-scheme: dark)",
+          },
+        },
+        {
+          tag: "meta",
+          attrs: {
+            property: "og:site_name",
+            content: "Pseudentity",
+          },
+        },
+        {
+          tag: "meta",
+          attrs: {
+            property: "og:type",
+            content: "website",
+          },
+        },
+        {
+          tag: "meta",
+          attrs: {
+            property: "og:image",
+            content: "https://pseudentity.dev/social-preview.png",
+          },
+        },
+        {
+          tag: "meta",
+          attrs: {
+            property: "twitter:image",
+            content: "https://pseudentity.dev/social-preview.png",
+          },
+        },
+        {
+          tag: "meta",
+          attrs: {
+            property: "twitter:card",
+            content: "summary_large_image",
+          },
+        },
+      ],
+      logo: {
+        light: "./public/logo-light.svg",
+        dark: "./public/logo-dark.svg",
+        replacesTitle: false,
+      },
+      customCss: ["./src/styles/custom.css"],
+      components: {
+        Footer: "./src/components/Footer.astro",
+      },
+      social: [
+        {
+          icon: "github",
+          label: "GitHub",
+          href: "https://github.com/pseudata/pseudentity",
+        },
+      ],
+      sidebar: [
+        {
+          label: "Reference",
+          autogenerate: { directory: "reference" },
+        },
+      ],
+    }),
+  ],
+});

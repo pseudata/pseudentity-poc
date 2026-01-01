@@ -1,0 +1,30 @@
+User-agent: *
+Allow: /
+
+# Block dynamic/infinite routes
+Disallow: /u/
+Disallow: /api/
+Disallow: /oidc/
+Disallow: /scim/
+
+# AI Search Engines
+User-agent: GPTBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: anthropic-ai
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+
+# Training Data Crawlers
+User-agent: CCBot
+Allow: /
+
+# Standard Search Engines
+User-agent: Googlebot
+Allow: /
+User-agent: Bingbot
+Allow: /
+
+Sitemap: https://pseudentity.dev/sitemap-index.xml

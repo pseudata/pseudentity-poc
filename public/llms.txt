@@ -1,0 +1,112 @@
+# Pseudentity
+
+> https://pseudentity.dev
+
+## Overview
+
+Pseudentity is a stateless OpenID Connect (OIDC) provider and visual companion for the pseudata ecosystem. It enables developers to add "Login with Pseudentity" to their applications for testing and development without configuring real identity providers like Auth0 or Okta.
+
+## The Problem We Solve
+
+Testing authentication flows in development typically requires:
+- Configuring expensive third-party identity providers
+- Managing test user databases
+- Coordinating credentials across teams
+- Resetting state between test runs
+
+Pseudentity eliminates all of this by making identities completely stateless and deterministic.
+
+## How Pseudentity Works
+
+Pseudentity uses **PseudoID**, a custom RFC 9562 UUID v8 format that encodes all generation parameters directly into the 128-bit ID space. This means any server can "inflate" a complete user profile just by decoding the ID—no database lookups required.
+
+**PseudoID Format:**
+`SSSSSSSS-SSSS-8SSS-vSTT-TTIIIIIIIII`
+
+- 64 bits: World Seed (universe ID)
+- 16 bits: Type Sequence (User = 101)
+- 40 bits: Index (0 to 1.1 trillion)
+
+Example: `00000000-0000-8002-a806-5000000003e8` encodes worldSeed=42, typeSeq=101, index=1000
+
+## Key Features
+
+- **OpenID Connect Provider**: Full OIDC compliance with signed JWTs—no sessions, no database
+- **Profile Viewer**: Rich UI to visualize any generated user with avatar and metadata
+- **Mock SCIM 2.0**: Test user provisioning flows (Okta, Azure AD integrations) with infinite, paginated employee lists
+- **Zero Database**: Entirely stateless, uses CPU (math) instead of storage (disk)
+- **Cross-Language Consistency**: Built on pseudata, ensures identical identities across all languages
+
+## URL Namespaces
+
+Pseudentity is organized into four namespaces:
+
+### Profile (`/u/`)
+- `/u/{uuid}` - Profile page with Svelte UI
+- `/u/{uuid}/data.json` - Raw user object
+- `/u/{uuid}/contact.vcf` - VCard 4.0 for mobile contacts
+- `/u/{uuid}/avatar.png` - Deterministic avatar image
+- `/u/{uuid}/qr.png` - QR code for mobile scanning
+
+### OIDC (`/oidc/`)
+- `/.well-known/openid-configuration` - Discovery document
+- `/oidc/authorize` - Login endpoint
+- `/oidc/token` - Token exchange
+- `/oidc/userinfo` - User profile endpoint
+- `/oidc/jwks` - JSON Web Key Set
+
+### Enterprise (`/scim/v2/`)
+- `/scim/v2/Users` - List users (supports pagination)
+- `/scim/v2/Users/{id}` - Get specific SCIM user
+
+### Factory (`/api/`)
+- `/api/v1/user` - Generate user with specific seed/index
+
+## Use Cases
+
+- **Testing Auth Flows**: Add OIDC login without configuring real identity providers
+- **Local Development**: Test authentication features locally with deterministic identities
+- **Profile Visualization**: See what generated users look like with avatars and metadata
+- **Enterprise SSO Testing**: Simulate SCIM provisioning flows for Okta, Azure AD
+- **Sales Demos**: Show authentication features with consistent, professional-looking identities
+- **Integration Testing**: Same user appears identically across frontend and backend
+
+## Technical Stack
+
+- **Framework**: Astro (SSR mode for dynamic generation)
+- **Interactivity**: Svelte (Islands architecture)
+- **Engine**: Pseudata (deterministic data generation)
+- **Hosting**: Vercel (Edge network + serverless functions)
+- **Database**: None (all state in UUID or signed tokens)
+
+## Documentation Structure
+
+- **/reference/concept/** - Stateless architecture and URL namespaces
+- **/reference/pseudoid/** - Deep dive into UUID v8 format and bit encoding
+
+## Powered by Pseudata
+
+Pseudentity is built on [pseudata](https://pseudata.dev), the deterministic mock data generator that produces identical data across Go, Java, Python, and TypeScript using the PCG32 algorithm.
+
+Key concepts from pseudata:
+- **Virtual Arrays**: O(1) infinite scale data access
+- **Cross-Language Consistency**: Same seed = same data everywhere
+- **Multi-Locale Support**: 15+ locales with culturally appropriate names
+- **PCG32 Algorithm**: Statistically superior RNG with proper stream independence
+
+## Current Status
+
+**Early Development**: Pseudentity is in active development and not yet ready for public deployment. The core PseudoID format and architecture are finalized. Implementation of the web interface, OIDC endpoints, and SCIM provider is ongoing.
+
+Star the repo to get notified about the first public release.
+
+## Links
+
+- Website: https://pseudentity.dev
+- GitHub: https://github.com/pseudata/pseudentity
+- Pseudata Library: https://pseudata.dev
+- Part of the Pseudata Ecosystem: https://github.com/pseudata
+
+## License
+
+Apache License 2.0 - Open source and free to use
